@@ -10,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import com.example.api_java.repository.Repository;
 
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -32,7 +31,7 @@ public class ControllerTest {
 
     @Test
     void testIndex() throws Exception {
-        mockMvc.perform(get(""))
+        mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("CONECTADO"));
     }
@@ -57,7 +56,7 @@ public class ControllerTest {
         // Creamos una persona a través del endpoint POST
         String personaJson = "{\"nombre\":\"Ana López\", \"telefono\":\"987654321\"}";
 
-        mockMvc.perform(post("/crear")
+        mockMvc.perform(post("/create")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(personaJson))
                 .andExpect(status().isOk())
@@ -80,7 +79,7 @@ public class ControllerTest {
         // Ahora actualizamos los datos de esa persona
         String updatedPersonaJson = "{\"nombre\":\"Carlos García\", \"telefono\":\"111111111\"}";
 
-        mockMvc.perform(put("/modificar/" + persona.getId())
+        mockMvc.perform(put("/update/" + persona.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedPersonaJson))
                 .andExpect(status().isOk())
